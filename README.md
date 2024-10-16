@@ -2,7 +2,7 @@
 -
 - Project Status: Active
 
-** Group 6_JPG Ubuntu Chatbot**
+**Group 6_JPG Ubuntu Chatbot**
 -  
 
 **Partner(s)/Contributor(s)**
