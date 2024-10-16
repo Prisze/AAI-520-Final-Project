@@ -12,10 +12,9 @@ Johnathan Long,
 Priscilla Marquez 
 
 **Methods Used**
--
+- GPT2
 - 
-- 
-- 
+
 
 **Technologies**
 -
