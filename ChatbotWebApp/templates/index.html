@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #chatbox {
+            width: 50%;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        #conversation {
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+        #user-input {
+            width: 90%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<div id="chatbox">
+    <h2>Chat with the Bot</h2>
+    <div id="conversation"></div>
+    <input type="text" id="user-input" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+    function sendMessage() {
+        var userMessage = $('#user-input').val();
+        if (userMessage === '') {
+            alert("Please enter a message.");
+            return;
+        }
+
+        $('#conversation').append('<p><strong>You:</strong> ' + userMessage + '</p>');
+        $('#user-input').val('');
+
+        $.ajax({
+            url: '/chat',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ message: userMessage }),
+            success: function(response) {
+                $('#conversation').append('<p><strong>Bot:</strong> ' + response.response + '</p>');
+                $('#conversation').scrollTop($('#conversation')[0].scrollHeight); // Auto-scroll
+            },
+            error: function() {
+                alert('Error communicating with the chatbot.');
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
